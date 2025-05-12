@@ -12,7 +12,7 @@
 
 @font-face {
     font-family: 'Visby';
-    src: url('./assets/fonts/Visby/VisbyBold Italic.otf.ttf') format('opentype');
+    src: url('./assets/fonts/Visby/VisbyBold.otf.ttf') format('opentype');
     font-weight: bold;
     font-style: normal;
   }
@@ -21,4 +21,34 @@
     font-family: 'Visby', sans-serif;
   }
   
+
+.slide div div{
+  display: inline-block;
+  font: bold;
+  color: white;
+  background-color: black;
+  padding: 4px 12px;
+  border-radius: 2px;
+  margin-bottom: 45px;
+  white-space: nowrap;
+}
+.slide div:nth-child(1){
+  animation: animate 5s linear infinite;
+}
+
+.slide{
+  overflow: hidden;
+  height: 50px;
+}
+
+@keyframes animate {
+  0%{margin-top: -270px;}
+  5%{margin-top: -180px;}
+  33%{margin-top: -180px;}
+  38%{margin-top: -90px;}
+  66%{margin-top: -90px;}
+  71%{margin-top: 0px;}
+  99.99%{margin-top: 0px;}
+  100%{margin-top: -270px;}
+}
 
