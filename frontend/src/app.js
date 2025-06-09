@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';  // 👈 Import OrbitControls
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import gsap from 'gsap'; // 👈 import GSAP
 
 export const initThreeScene = () => {
     // Camera
@@ -10,7 +11,7 @@ export const initThreeScene = () => {
         0.1,
         1000
     );
-    camera.position.set(0, 1.5, 5);
+    camera.position.set(0, 1.5, 20); // 👈 Start from far (z = 20)
 
     // Scene
     const scene = new THREE.Scene();
@@ -23,9 +24,10 @@ export const initThreeScene = () => {
 
     // OrbitControls 
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true; 
+    controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.target.set(0, 1.5, 0);  
+    controls.enableZoom = false;
+    controls.target.set(0, 1.5, 0);
     controls.update();
 
     // Lighting
@@ -49,13 +51,26 @@ export const initThreeScene = () => {
             michi.position.y = 1;
             scene.add(michi);
 
-            // Animation
+            // Camera animation timeline
+            const tl = gsap.timeline();
+            tl.to(camera.position, {
+                duration: 2,
+                z: 20,
+                ease: 'none'
+            }).to(camera.position, {
+                duration: 3,
+                z: 5,
+                ease: 'power2.out',
+                onUpdate: () => controls.update()
+            }, "+=0.6"); 
+
+            // Animation mixer
             mixer = new THREE.AnimationMixer(michi);
             if (gltf.animations.length > 0) {
                 mixer.clipAction(gltf.animations[0]).play();
             }
 
-            // Emissive glow for certain parts
+            // Emissive glow
             michi.traverse((child) => {
                 if (child.isMesh && child.material?.name === 'mat_michi') {
                     const glowingParts = [
@@ -73,6 +88,7 @@ export const initThreeScene = () => {
                 }
             });
         },
+
         undefined,
         function (error) {
             console.error('GLTF load error:', error);
@@ -82,7 +98,7 @@ export const initThreeScene = () => {
     // Animation loop
     const reRender3d = () => {
         requestAnimationFrame(reRender3d);
-        controls.update(); 
+        controls.update();
         renderer.render(scene, camera);
         if (mixer) mixer.update(0.004);
     };
