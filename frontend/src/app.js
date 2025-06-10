@@ -47,7 +47,7 @@ export const initThreeScene = () => {
         'michi_bot.glb',
         function (gltf) {
             const michi = gltf.scene;
-            michi.scale.set(225, 225, 225);
+            michi.scale.set(210, 210, 210);
             michi.position.y = 1;
             scene.add(michi);
 

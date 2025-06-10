@@ -7,6 +7,7 @@ export default {
     extend: {
       fontFamily: {
         visby: ['Visby', 'sans-serif'],
+        Oxanium: ['Oxanium', 'sans-serif'],
       },
     },
   },
