@@ -258,12 +258,13 @@ const Home = () => {
 
 
               </div>
-              <div className='p-5 text-white text-2xl font-Oxanium'>
+              <div className='p-4 py-2 text-white text-2xl font-Oxanium'>
                 Description of the subject:
 
-                <div className='py-5 text-white text-xl font-Oxanium text-justify'>
+                <div className='py-4 text-white text-xl font-Oxanium text-justify'>
                   Anushka is currently pursuing Computer Science at DTU (2nd year) and spends most of her time building modern frontends,
-                  researching about machine learning, and exploring blockchain on the assembly level.
+                  researching about machine learning, and exploring blockchain. Additionally, she is also pursuing actuarial science, and progressing 
+                  in the field of data analytics.
                 </div>
                 <div className='pb-3 text-red-600 text-xl font-Oxanium'>
                   Skillset:
