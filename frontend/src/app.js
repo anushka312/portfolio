@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import gsap from 'gsap'; // 👈 import GSAP
+import gsap from 'gsap'; // 
 
 export const initThreeScene = () => {
     // Camera
@@ -11,7 +11,7 @@ export const initThreeScene = () => {
         0.1,
         1000
     );
-    camera.position.set(0, 1.5, 20); // 👈 Start from far (z = 20)
+    camera.position.set(0.5, 1.5, 4);
 
     // Scene
     const scene = new THREE.Scene();
@@ -41,34 +41,112 @@ export const initThreeScene = () => {
     const pointLight = new THREE.PointLight(0xfcf3cf, 5, 20);
     scene.add(pointLight);
 
+    const arrPositionModel = [
+        {
+            id: "home",
+            position: { x: 0, y: 1, z: 0.5 },
+            rotation: { x: 0, y: 0, z: 0 },
+            scale: { x: 375, y: 375, z: 375 }
+        },
+        {
+            id: "about",
+            position: { x: -12.5, y: 1, z: 0.5 },
+            rotation: { x: 0, y: 0.8, z: 0 },
+            scale: { x: 400, y: 400, z: 400 }
+        },
+        {
+            id: "projects",
+            position: { x: 0, y: -4.5, z: 0.5 },
+            rotation: { x: -0.2, y: 0, z: 0 },
+            scale: { x: 220, y: 220, z: 220 }
+        },
+        {
+            id: "contact",
+            position: { x: -0.5, y: -1.5, z: -5 },
+            rotation: { x: -0.25, y: 0, z: 0 },
+            scale: { x: 200, y: 200, z: 200 }
+        }
+    ];
+    let michi;
+    let lastSection;
+    const modelMove = () => {
+        const sections = document.querySelectorAll('.section');
+        let currentSection;
+
+        sections.forEach((section) => {
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= window.innerHeight / 3) {
+                currentSection = section.id;
+            }
+        });
+
+        if (!currentSection || currentSection === lastSection) return;
+        lastSection = currentSection;
+
+        const data = arrPositionModel.find(val => val.id === currentSection);
+        if (data && michi) {
+            gsap.to(michi.position, {
+                ...data.position,
+                duration: 3,
+                ease: "power1.out"
+            });
+            gsap.to(michi.scale, {
+                ...data.scale,
+                duration: 2,
+                ease: "power1.out"
+            });
+            gsap.to(michi.rotation, {
+                ...data.rotation,
+                duration: 2,
+                ease: "power1.out"
+            });
+
+            if (currentSection === "home") {
+                gsap.to(camera.position, {
+                    z: 10,
+                    duration: 2.5,
+                    ease: 'power2.out',
+                    onUpdate: () => controls.update()
+                });
+            } else if (currentSection === "contact") {
+                gsap.to(camera.position, {
+                    z: 5,
+                    duration: 2.5,
+                    ease: 'power2.out',
+                    onUpdate: () => controls.update()
+                });
+            } else {
+                gsap.to(camera.position, {
+                    z: 20,
+                    duration: 2.5,
+                    ease: 'power2.out',
+                    onUpdate: () => controls.update()
+                });
+            }
+        }
+    };
+
+
     // Load Michi Model
     const loader = new GLTFLoader();
     loader.load(
         'michi_bot.glb',
         function (gltf) {
-            const michi = gltf.scene;
+            michi = gltf.scene;
             michi.scale.set(210, 210, 210);
             michi.position.y = 1;
+            michi.position.z = 0.5;
             scene.add(michi);
 
-            // Camera animation timeline
-            const tl = gsap.timeline();
-            tl.to(camera.position, {
-                duration: 2,
-                z: 20,
-                ease: 'none'
-            }).to(camera.position, {
-                duration: 3,
-                z: 5,
-                ease: 'power2.out',
-                onUpdate: () => controls.update()
-            }, "+=0.6"); 
+
 
             // Animation mixer
             mixer = new THREE.AnimationMixer(michi);
             if (gltf.animations.length > 0) {
                 mixer.clipAction(gltf.animations[0]).play();
             }
+
+            modelMove();
 
             // Emissive glow
             michi.traverse((child) => {
@@ -87,6 +165,7 @@ export const initThreeScene = () => {
                     }
                 }
             });
+            window.addEventListener('scroll', modelMove);
         },
 
         undefined,
@@ -102,5 +181,11 @@ export const initThreeScene = () => {
         renderer.render(scene, camera);
         if (mixer) mixer.update(0.004);
     };
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
     reRender3d();
 };

@@ -31,11 +31,22 @@
   height: 100%;
 }
 
+.blinking-cursor::after {
+  content: '|';
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 #container3d{
   position: fixed;
   inset: 0; 
   z-index: 100;
-  pointer-events: auto;
+  pointer-events: none;
+  z-index: 9999;
 
 }
 .loader {
@@ -56,3 +67,6 @@
 @keyframes blink {
   50% { border-color: transparent; }
 }
+
+
+
