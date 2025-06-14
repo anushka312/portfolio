@@ -74,9 +74,9 @@ const Home = () => {
       "Loading subject : 'Anushka' from the Vault..."
     ],
     loop: 1,
-    typeSpeed: 50,
-    deleteSpeed: 30,
-    delaySpeed: 80,
+    typeSpeed: 60,
+    deleteSpeed: 0,
+    delaySpeed: 90,
   });
   const [text2] = useTypewriter({
     words: [
@@ -126,7 +126,7 @@ const Home = () => {
           setCurrentDialogueIndex(-1);
         }
       }, 3000);
-    }, 11500);
+    }, 12500);
 
     return () => {
       clearTimeout(startTimeout);
@@ -150,6 +150,7 @@ const Home = () => {
           }`}
       >
         <span>
+          <Cursor cursorStyle="> " />
           {text1}
           <Cursor cursorStyle="|" />
         </span>
