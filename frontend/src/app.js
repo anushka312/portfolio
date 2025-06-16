@@ -56,7 +56,7 @@ export const initThreeScene = () => {
         },
         {
             id: "projects",
-            position: { x: 0, y: -4.5, z: 0.5 },
+            position: { x: 0, y: -3, z: 0.5 },
             rotation: { x: -0.2, y: 0, z: 0 },
             scale: { x: 220, y: 220, z: 220 }
         },
@@ -182,10 +182,12 @@ export const initThreeScene = () => {
         if (mixer) mixer.update(0.004);
     };
     window.addEventListener('resize', () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        
     });
+
 
     reRender3d();
 };
