@@ -46,7 +46,7 @@ const Home = () => {
 
   const cards = [
     {
-      id: '001',
+      id: 'MERN Stack, Gemini API',
       image: cimg1,
       title: 'SecVote',
       description: 'SecVote is our Automated Voter Verification Management System—a comprehensive digital platform designed to handle voter verification, crowd management, slot booking, and real-time tracking for polling booths. It replaces traditional manual processes with a secure, efficient, and scalable solution that ensures smooth operations on election day.',
@@ -54,7 +54,7 @@ const Home = () => {
       video: secvoteV
     },
     {
-      id: '002',
+      id: 'Python, Flask API, React.js, OpenStreetMap, Leaflet',
       image: cimg2,
       title: 'ResQNet',
       description: 'ResQNet is an AI-powered crisis response platform that detects and verifies emergencies in real time, connecting people to the right help instantly. By centralizing incident data, service coordination, and user support, ResQNet eliminates delays and confusion—delivering swift, location-based assistance when every second counts.',
@@ -322,7 +322,7 @@ const Home = () => {
                   Crime Commited: <span className="text-red-500">{cards[cardIndex].title}</span>
                 </p>
                 <p className="pb-2">
-                  Crime ID: <span className="text-green-500">{cards[cardIndex].id}</span>
+                  Crime Skills: <span className="text-green-500">{cards[cardIndex].id}</span>
                 </p>
                 <p>
                   Associated Links:{' '}
