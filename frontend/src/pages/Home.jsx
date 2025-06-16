@@ -303,7 +303,7 @@ const Home = () => {
             {/* Left Arrow */}
             <button
               onClick={prevCard}
-              className="absolute top-1/2 left-2 -translate-y-1/2 z-20 bg-black bg-opacity-60 rounded-full text-3xl px-3 hover:scale-110 transition-transform duration-200"
+              className="absolute top-1/2 -left-5 -translate-y-1/2 z-20 bg-black bg-opacity-60 rounded-full text-3xl px-3 hover:scale-110 transition-transform duration-200"
             >
               &#8592;
             </button>
@@ -345,7 +345,7 @@ const Home = () => {
               {/* Right Arrow */}
               <button
                 onClick={nextCard}
-                className="absolute top-1/2 right-2 -translate-y-1/2 z-20 bg-black bg-opacity-60 rounded-full text-3xl px-3 hover:scale-110 transition-transform duration-200"
+                className="absolute top-1/2 -right-5 -translate-y-1/2 z-20 bg-black bg-opacity-60 rounded-full text-3xl px-3 hover:scale-110 transition-transform duration-200"
               >
                 &#8594;
               </button>
