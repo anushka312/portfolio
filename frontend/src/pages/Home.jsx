@@ -23,8 +23,10 @@ import linkedin from '../assets/linkedin.png';
 import github from '../assets/github.png';
 import cimg1 from '../assets/cimg1.png';
 import cimg2 from '../assets/cimg2.png';
+import cimg3 from '../assets/cimg3.png';
 import secvoteV from '../assets/secvote.mp4';
 import resqnetV from '../assets/resqnet.mp4';
+import verdefiV from '../assets/verdefi.mp4';
 import bg from '../assets/bg.jpg';
 import { initThreeScene } from '../app.js';
 
@@ -60,6 +62,14 @@ const Home = () => {
       description: 'ResQNet is an AI-powered crisis response platform that detects and verifies emergencies in real time, connecting people to the right help instantly. By centralizing incident data, service coordination, and user support, ResQNet eliminates delays and confusion—delivering swift, location-based assistance when every second counts.',
       links: 'https://devfolio.co/projects/resqnet-84b2',
       video: resqnetV
+    },
+    {
+      id: 'MongoDB, React.js, Web3, Ethers.js, Phaser.js, Tailwind CSS',
+      image: cimg3,
+      title: 'VerdeFi',
+      description: 'VerdeFi is a purpose-driven Web3 app built on the Umi Devnet, where users unlock a calming game experience by making a one-time payment. A large portion of that payment is routed to a donation address — letting users contribute to meaningful causes simply by playing. Built for the Umi Hackathon 2025',
+      links: 'https://verdefi.onrender.com/',
+      video: verdefiV
     }
   ];
 
